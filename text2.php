@@ -4,7 +4,7 @@ declare(strict_types=1);
 //$searchRoot - откуда начинаем поиск и далее путь
 //$searchName переменная
 //$searchResult = [] переменная с пустым массивом чтобы было куда складывать пути
-$searchRoot = 'C:\xampp\htdocs\iva_project\test_search';
+$searchRoot = __DIR__;
 $searchName = 'test.txt';
 $searchResult = [];
 
@@ -50,12 +50,7 @@ findFile($searchRoot, $searchName, $searchResult);
 //потом callback. оставляю в массиве только те пути чьи файлы заполнены данными
 //return filesize($path) > 0 беру размер файла через filesize(). если больше 0 то true
 
-$searchResult = array_filter(
-    $searchResult,
-    static function (string $path): bool {
-        return filesize($path) > 0;
-    }
-);
+$searchResult = array_filter($searchResult, 'filesize');
 //count($searchResult) сколько элементов в массиве "=== 0 " строго равно нулю
 //если в массиве ничего нет то..
 //если пусто то скажи,что результат нулевой
